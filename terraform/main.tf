@@ -51,3 +51,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     load_balancer_sku = "standard"
   }
 }
+
+resource "local_sensitive_file" "kube_config" {
+  filename = "${path.module}/azurek8s"
+  content  = azurerm_kubernetes_cluster.k8s.kube_config_raw
+}
