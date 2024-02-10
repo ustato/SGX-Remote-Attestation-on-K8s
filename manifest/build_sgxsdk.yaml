@@ -11,7 +11,7 @@ data:
   Dockerfile: |
     FROM ubuntu:22.04 as sdk
 
-    LABEL org.opencontainers.image.source=https://github.com/ustato/hello-world-remote-attestation-on-k8s/blob/main/manifest/kaniko.yaml
+    LABEL org.opencontainers.image.source=https://github.com/ustato/SGX-Remote-Attestation-on-K8s/blob/main/manifest/kaniko.yaml
     LABEL org.opencontainers.image.licenses=BSD-3-Clause
     LABEL org.opencontainers.image.description="Linux SGX v2.22 for Ubuntu 22.04 (jammy)"
 

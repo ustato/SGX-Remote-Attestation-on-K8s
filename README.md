@@ -6,10 +6,10 @@ Example Implementation of Remote Attestation with Kubernets and Humane-RAFW-MAA
 
 ```bash
 ### clone
-$ git clone https://github.com/ustato/hello-world-remote-attestation-on-k8s
+$ git clone https://github.com/ustato/SGX-Remote-Attestation-on-K8s
 
 ### terraform
-$ cd hello-world-remote-attestation-on-k8s/terraform
+$ cd SGX-Remote-Attestation-on-K8s/terraform
 $ terraform init
 
 ### apply
@@ -22,7 +22,7 @@ $ export KUBECONFIG=./azurek8s
 ## Quickstart
 
 ```bash
-$ cd hello-world-remote-attestation-on-k8s/terraform
+$ cd SGX-Remote-Attestation-on-K8s/terraform
 
 ### start ISV
 $ kubectl apply -f ../manifest/isv.yaml
@@ -73,7 +73,7 @@ DEBUG: g88fixKce/vuGYgFcUJa4zcp3Gu94sZOosXeewiAh/o=
 ## Destroy
 
 ```bash
-$ cd hello-world-remote-attestation-on-k8s/terraform
+$ cd SGX-Remote-Attestation-on-K8s/terraform
 
 ### destroy ISV
 $ kubectl delete -f ../manifest/isv.yaml
