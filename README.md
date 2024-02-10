@@ -13,7 +13,7 @@ $ cd hello-world-remote-attestation-on-k8s/terraform
 $ terraform init
 
 ### apply
-$ terraform apply
+$ terraform apply -auto-approve
 
 ### load kubeconfig
 $ export KUBECONFIG=./azurek8s
@@ -68,4 +68,16 @@ DEBUG: g88fixKce/vuGYgFcUJa4zcp3Gu94sZOosXeewiAh/o=
  INFO:
  INFO: Sent RA destruction request to ISV.
  INFO:
+```
+
+## Destroy
+
+```bash
+$ cd hello-world-remote-attestation-on-k8s/terraform
+
+### destroy ISV
+$ kubectl delete -f ../manifest/isv.yaml
+
+### destroy all
+$ terraform destroy -auto-approve
 ```
