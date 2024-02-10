@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scripts
+data:
+  build.sh: |
+    #!/bin/bash
+    set -e
+
+    cd /root/
+    git clone https://github.com/acompany-develop/Humane-RAFW-MAA --depth 1
+    cd Humane-RAFW-MAA
+    cp sgx_default_qcnl.conf /etc/sgx_default_qcnl.conf
+
+    make
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: isv
+  namespace: default
+spec:
+  containers:
+    - name: isv
+      image: ustato/linux-sgx:2.22
+      resources:
+        limits:
+          sgx.intel.com/epc: "90Mi"
+        requests:
+          sgx.intel.com/epc: "90Mi"
+      env:
+        - name: SGX_AESM_ADDR
+          value: "1"
+      workingDir: /root
+      command:
+        - "/bin/bash"
+        - "-c"
+        - "bash /root/scripts/build.sh && cd /root/Humane-RAFW-MAA && ./server_app"
+      volumeMounts:
+        - name: var-run-aesmd
+          mountPath: /var/run/aesmd
+        - name: scripts
+          mountPath: "/root/scripts"
+  restartPolicy: "Never"
+  volumes:
+    - name: var-run-aesmd
+      hostPath:
+        path: /var/run/aesmd
+    - name: scripts
+      configMap:
+        name: scripts
+        items:
+          - key: build.sh
+            path: build.sh
